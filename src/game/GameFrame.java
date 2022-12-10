@@ -1,40 +1,76 @@
 package game;
 
-import org.newdawn.slick.Game;
-
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Random;
 
 public class GameFrame extends JFrame implements KeyListener {
 
     GameFrame(){
+        ballPosX = 300;
+        ballPosY = 300;
+        gamePanel = new GamePanel();
+        block = new Block[2000];
+        gameOver = false;
+        n = 0;
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        add(gamePanel);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         /*set dimentions*/
-        setSize(200,300);
-
-        setLayout(null);
-
-        /*add key listener as this gameframe*/
-        addKeyListener(this);
-
+        setSize(1000,700);
         /*center the window*/
         setLocationRelativeTo(null);
-
-        add(new GamePanel());
-
-        //pack();
-
         /*display on screen*/
         setVisible(true);
+        addKeyListener(this);
+
+        /*add blocks*/
+        for (int i = 1; i <= 20; i++) {
+            for (int j = 1; j <= 10; j++) {
+                block[n] = new Block();
+                block[n].setShapeColor(new Random().nextInt(4) + 1);
+                block[n].posX = i * 43;
+                block[n].posY = j * 20;
+                System.out.println(block[n].getShapeColor());
+                n++;
+            }
+        }
 
 
+
+        ActionListener listener = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                if (!gameOver) {
+                    //todo ball detections
+                    //todo ball begin
+                    ballPosX += ballMotionX;
+                    ballPosY += ballMotionY;
+                    //todo collisions with blocks
+                }
+                gamePanel.repaint();
+            }
+        };
+        Timer timer = new Timer(50, listener);
+        timer.start();
     }
 
 
-    /*KeyListener implemented methods*/
+
+
+    public static int ballPosX;
+    public static int ballPosY;
+    private static GamePanel gamePanel;
+    public static Block[] block;
+    public static int n;
+
+    public int ballMotionX = 5, ballMotionY = 5;
+    private boolean gameOver;
+
+
+    /*keyListener implement methods*/
     @Override
     public void keyTyped(KeyEvent e) {
 
@@ -42,7 +78,7 @@ public class GameFrame extends JFrame implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-
+        //todo bumper movement
     }
 
     @Override
