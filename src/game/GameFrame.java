@@ -1,5 +1,7 @@
 package game;
 
+import org.newdawn.slick.Game;
+
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -21,8 +23,14 @@ public class GameFrame extends JFrame implements KeyListener {
         /*center the window*/
         setLocationRelativeTo(null);
 
+        add(new GamePanel());
+
+        //pack();
+
         /*display on screen*/
         setVisible(true);
+
+
     }
 
 
