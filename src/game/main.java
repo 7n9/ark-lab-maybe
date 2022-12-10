@@ -1,25 +1,20 @@
 package game;
 
 import javax.swing.JFrame;
+import java.awt.event.KeyEvent;
 
-public class main extends JFrame{
+public class main{
 
-
-    public main(){
-        initComponents();
-
-
-    }
 
     public static void main(String[] args) {
         tickThread = new ThreadRunTick();
         tickThread.start();
+        new GameFrame();
     }
 
     public static void onTick(){
         System.out.println("TICK!");
         tickCount += 1;
-
     }
 
     private void initComponents(){
