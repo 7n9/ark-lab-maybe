@@ -128,14 +128,42 @@ public class GameFrame extends JFrame implements KeyListener {
     public void keyPressed(KeyEvent e) {
         //todo bumper movement
         /*bumper movement*/
-        if(e.getKeyCode() == KeyEvent.VK_LEFT){
-            if (bumperX > 2) {
-                bumperX -= 10;
+        if(!gameOver){
+            if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                if (bumperX > 2) {
+                    bumperX -= 10;
+                }
             }
-        }
-        if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-            if (bumperX < 896) {
-                bumperX += 10;
+            if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                if (bumperX < 896) {
+                    bumperX += 10;
+                }
+            }
+        }else{
+            if (e.getKeyCode() == KeyEvent.VK_Y) {
+                ballPosX = 300;
+                ballPosY = 300;
+                block = new Block[2000];
+                blockCount = 0;
+                score = 0;
+                motionModifierRandom = random.nextInt(5) - 2;
+                ballMotionX = 5 + motionModifierRandom;
+                ballMotionY = 5 + motionModifierRandom;
+                bumperX = 450;
+                /*readd blocks*/
+                for (int i = 1; i <= 18; i++) {
+                    for (int j = 1; j <= 10; j++) {
+                        block[blockCount] = new Block();
+                        block[blockCount].setShapeColor(random.nextInt(6) + 1);
+                        block[blockCount].posX = -48 + i * 55;
+                        block[blockCount].posY = 30 + j * 25;
+                        blockCount++;
+                    }
+                }
+                gameOver = false;
+            }
+            if (e.getKeyCode() == KeyEvent.VK_N) {
+                System.exit(0);
             }
         }
     }

@@ -52,7 +52,7 @@ public class GamePanel extends JPanel {
         if(!GameFrame.gameOver){
             g.setFont(new Font("Arial", Font.BOLD, 20));
             g.setColor(Color.WHITE);
-            g.drawString("Your score : " + GameFrame.score + "      Motion modifier: " + GameFrame.motionModifierRandom, 20, 20);
+            g.drawString("Score : " + GameFrame.score + "  |  Motion modifier: " + GameFrame.motionModifierRandom, 20, 20);
         }else{
             /*g.o.frame*/
             g.setColor(Color.WHITE);
@@ -70,6 +70,11 @@ public class GamePanel extends JPanel {
             String finalScoreString = "Final Score: " + GameFrame.score;
             int finalScoreStringWidth = g.getFontMetrics().stringWidth(finalScoreString);
             g.drawString(finalScoreString, 500 - (finalScoreStringWidth/2), 350);
+            /*restart text*/
+            g.setFont(new Font("Arial", Font.BOLD, 20));
+            String restartString = "Restart?  Y/N";
+            int restartStringWidth = g.getFontMetrics().stringWidth(restartString);
+            g.drawString(restartString, 500 - (restartStringWidth/2), 390);
         }
 
     }
