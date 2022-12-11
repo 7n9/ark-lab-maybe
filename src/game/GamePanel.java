@@ -18,7 +18,7 @@ public class GamePanel extends JPanel {
         /*ball*/
         Graphics ball = g;
         ball.setColor(Color.RED);
-        ball.fillOval(ballPosX, ballPosY, 30 ,30);
+        ball.fillOval(ballPosX, ballPosY, 20 ,20);
 
         g.setFont(new Font("MyFont", 20, 20));
         g.setColor(Color.WHITE);
@@ -27,10 +27,9 @@ public class GamePanel extends JPanel {
         Graphics bumper = g;
         bumper.setColor(Color.BLUE);
 
-        int bumperX = 300;
 
         //bumper positioning
-        if (bumperX > 940)
+        if (bumperX > 950)
             bumperX = 900;
         if (bumperX < 0)
             bumperX = 0;
@@ -38,13 +37,16 @@ public class GamePanel extends JPanel {
 
         /*blocks*/
         Graphics block = g;
-        for (int i = 0; i < GameFrame.n; i++) {
-            block.setColor(GameFrame.block[i].getShapeColor());
-            block.fillRect(GameFrame.block[i].posX + 2, GameFrame.block[i].posY + 2, 40, 20);
+        for (int i = 0; i < GameFrame.blockCount; i++) {
+            Block gBlock = GameFrame.block[i];
+            block.setColor(gBlock.getShapeColor());
+            block.fillRect(gBlock.posX + 2, gBlock.posY + 2, gBlock.blockWidth, gBlock.blockHeight);
             Color a = new Color(Color.HSBtoRGB((System.currentTimeMillis() % 1000L) / 1000.0F, 0.55F, 0.55F), false);
             block.setColor(a);
-            block.drawRect(GameFrame.block[i].posX + 2, GameFrame.block[i].posY + 2, 40, 20);
+            block.drawRect(gBlock.posX + 2, gBlock.posY + 2, gBlock.blockWidth, gBlock.blockHeight);
         }
 
     }
+
+    public static int bumperX = 300;
 }
