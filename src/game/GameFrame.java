@@ -104,7 +104,7 @@ public class GameFrame extends JFrame implements KeyListener {
     private boolean isBallCollidedWithBumper(){
         //bumperx
         //ballwidth&height = 20
-        if(ballPosX + 20 >= bumperX && ballPosX < bumperX + 100 && ballPosY + 20 > 600){
+        if(ballPosX + 20 >= bumperX && ballPosX < bumperX + 100 && ballPosY + 20 > 600 && ballPosY < 620){
             return true;
         }else{
             return false;
