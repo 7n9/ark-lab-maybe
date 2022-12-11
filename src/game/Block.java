@@ -8,14 +8,19 @@ public class Block {
         switch (colorInt) {
             case 1:
                 this.shapeColor = Color.BLUE;
+                break;
             case 2:
                 this.shapeColor = Color.RED;
+                break;
             case 3:
                 this.shapeColor = Color.YELLOW;
+                break;
             case 4:
                 this.shapeColor = Color.WHITE;
+                break;
             case 5:
                 this.shapeColor = Color.GREEN;
+                break;
             case 6:
                 this.shapeColor = Color.MAGENTA;
             default:

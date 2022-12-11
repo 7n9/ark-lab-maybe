@@ -31,10 +31,9 @@ public class GameFrame extends JFrame implements KeyListener {
         for (int i = 1; i <= 20; i++) {
             for (int j = 1; j <= 10; j++) {
                 block[n] = new Block();
-                block[n].setShapeColor(new Random().nextInt(4) + 1);
+                block[n].setShapeColor(new Random().nextInt(6) + 1);
                 block[n].posX = i * 43;
                 block[n].posY = j * 20;
-                System.out.println(block[n].getShapeColor());
                 n++;
             }
         }
