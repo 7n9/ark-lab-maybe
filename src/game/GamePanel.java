@@ -49,4 +49,7 @@ public class GamePanel extends JPanel {
 
     }
 
+    public Dimension getPreferredSize() {
+        return new Dimension(1000, 700);
+    }
 }
