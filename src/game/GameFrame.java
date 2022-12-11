@@ -20,7 +20,7 @@ public class GameFrame extends JFrame implements KeyListener {
         random = new Random(System.currentTimeMillis());
         ballMotionX = 5;
         ballMotionY = 5;
-        bumperX = 300;
+        bumperX = 450;
 
 
         add(gamePanel);
