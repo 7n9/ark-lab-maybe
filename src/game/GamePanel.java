@@ -13,8 +13,15 @@ public class GamePanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.setColor(Color.BLACK);
+
+        Color rainbow = new Color(Color.HSBtoRGB((System.currentTimeMillis() % 1000L) / 1000.0F, 0.55F, 0.95F), false);
+        Color darkerRainbow = new Color(Color.HSBtoRGB((System.currentTimeMillis() % 1000L) / 1000.0F, 0.55F, 0.55F), false);
+        g.setColor(rainbow);
+
         g.fillRect(0, 0, 1000, 700);
+        g.setColor(Color.BLACK);
+        g.fillRect(2, 2, 996, 696);
+
         /*ball*/
         Graphics ball = g;
         ball.setColor(Color.RED);
@@ -42,8 +49,7 @@ public class GamePanel extends JPanel {
             Block gBlock = GameFrame.block[i];
             block.setColor(gBlock.getShapeColor());
             block.fillRect(gBlock.posX , gBlock.posY, gBlock.blockWidth, gBlock.blockHeight);
-            Color a = new Color(Color.HSBtoRGB((System.currentTimeMillis() % 1000L) / 1000.0F, 0.55F, 0.55F), false);
-            block.setColor(a);
+            block.setColor(darkerRainbow);
             block.drawRect(gBlock.posX, gBlock.posY, gBlock.blockWidth, gBlock.blockHeight);
         }
 
