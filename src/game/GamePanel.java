@@ -34,7 +34,7 @@ public class GamePanel extends JPanel {
             bumperX = 900;
         if (bumperX < 0)
             bumperX = 0;
-        bumper.fillRect(bumperX, 650, 100, 20);
+        bumper.fillRect(bumperX, 600, 100, 20);
 
         /*blocks*/
         Graphics block = g;
