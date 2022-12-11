@@ -40,9 +40,10 @@ public class GamePanel extends JPanel {
         Graphics block = g;
         for (int i = 0; i < GameFrame.n; i++) {
             block.setColor(GameFrame.block[i].getShapeColor());
-            block.fillRect(GameFrame.block[i].posX, GameFrame.block[i].posY, 43, 20);
-            block.setColor(Color.red);
-            block.drawRect(GameFrame.block[i].posX, GameFrame.block[i].posY, 43, 20);
+            block.fillRect(GameFrame.block[i].posX + 2, GameFrame.block[i].posY + 2, 40, 20);
+            Color a = new Color(Color.HSBtoRGB((System.currentTimeMillis() % 1000L) / 1000.0F, 0.55F, 0.55F), false);
+            block.setColor(a);
+            block.drawRect(GameFrame.block[i].posX + 2, GameFrame.block[i].posY + 2, 40, 20);
         }
 
     }
