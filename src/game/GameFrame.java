@@ -34,12 +34,12 @@ public class GameFrame extends JFrame implements KeyListener {
         addKeyListener(this);
 
         /*add blocks*/
-        for (int i = 1; i <= 20; i++) {
+        for (int i = 1; i <= 18; i++) {
             for (int j = 1; j <= 10; j++) {
                 block[blockCount] = new Block();
                 block[blockCount].setShapeColor(random.nextInt(6) + 1);
-                block[blockCount].posX = i * 45;
-                block[blockCount].posY = j * 25;
+                block[blockCount].posX = -48 + i * 55;//48.5, half a pixel diff?
+                block[blockCount].posY = 30 + j * 25;
                 blockCount++;
             }
         }

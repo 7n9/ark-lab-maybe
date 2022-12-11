@@ -30,7 +30,7 @@ public class Block {
     public Color getShapeColor(){
         return this.shapeColor;
     }
-    public int blockWidth = 40, blockHeight = 20;
+    public int blockWidth = 50, blockHeight = 20;
     public int posX, posY;
     private Color shapeColor = new Color(0.0F, 0.0F, 0.0F);
 }
