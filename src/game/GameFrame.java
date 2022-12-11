@@ -122,10 +122,10 @@ public class GameFrame extends JFrame implements KeyListener {
         //todo bumper movement
         /*bumper movement*/
         if(e.getKeyCode() == KeyEvent.VK_LEFT){
-            bumperX -= 5;
+            bumperX -= 10;
         }
         if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-            bumperX += 5;
+            bumperX += 10;
         }
     }
 
