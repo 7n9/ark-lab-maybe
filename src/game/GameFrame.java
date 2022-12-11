@@ -18,8 +18,9 @@ public class GameFrame extends JFrame implements KeyListener {
         blockCount = 0;
         score = 0;
         random = new Random(System.currentTimeMillis());
-        ballMotionX = 5;
-        ballMotionY = 5;
+        motionModifierRandom = random.nextInt(5) - 2;
+        ballMotionX = 5 + motionModifierRandom;
+        ballMotionY = 5 + motionModifierRandom;
         bumperX = 450;
 
 
@@ -141,13 +142,14 @@ public class GameFrame extends JFrame implements KeyListener {
 
     public static int ballPosX;
     public static int ballPosY;
-    private final GamePanel gamePanel;
     public static Block[] block;
     public static int blockCount;
     public static int bumperX;
     public static int score;
+    public static int motionModifierRandom;
+    public static boolean gameOver;
 
     private Random random;
     private int ballMotionX, ballMotionY;
-    private boolean gameOver;
+    private final GamePanel gamePanel;
 }
