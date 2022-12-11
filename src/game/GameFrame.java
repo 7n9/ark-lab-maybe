@@ -10,8 +10,8 @@ import java.util.Random;
 public class GameFrame extends JFrame implements KeyListener {
 
     GameFrame(){
-        ballPosX = 300;
-        ballPosY = 300;
+        ballPosX = 490;
+        ballPosY = 550;
         gamePanel = new GamePanel();
         block = new Block[2000];
         gameOver = false;
@@ -19,8 +19,16 @@ public class GameFrame extends JFrame implements KeyListener {
         score = 0;
         random = new Random(System.currentTimeMillis());
         motionModifierRandom = random.nextInt(5) - 2;
+        rightleftupdownModifierRandomBool = random.nextBoolean();
         ballMotionX = 5 + motionModifierRandom;
+        if(rightleftupdownModifierRandomBool){
+            ballMotionX = -ballMotionX;
+        }
         ballMotionY = 5 + motionModifierRandom;
+        rightleftupdownModifierRandomBool = random.nextBoolean();
+        if(rightleftupdownModifierRandomBool){
+            ballMotionY = -ballMotionY;
+        }
         bumperX = 450;
 
 
@@ -56,7 +64,6 @@ public class GameFrame extends JFrame implements KeyListener {
         ActionListener listener = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
                 if (!gameOver) {
-                    //todo ball detections
                     if(ballPosX <2){
                         ballMotionX = -ballMotionX;
                     }
@@ -69,12 +76,9 @@ public class GameFrame extends JFrame implements KeyListener {
                     if(ballPosY + 20 > 700){
                         gameOver = true;
                     }
-                    //todo ball begin
-                    //todo random ball start?
 
                     ballPosX += ballMotionX;
                     ballPosY -= ballMotionY;
-                    //todo collisions with blocks
                     //todo maybe add sidehit to blocks?
 
                     /*block collisions*/
@@ -87,7 +91,6 @@ public class GameFrame extends JFrame implements KeyListener {
                     if(isBallCollidedWithBumper()){
                         ballMotionY = -ballMotionY;
                     }
-                    System.out.println(ballPosY);
                 }
                 gamePanel.repaint();
             }
@@ -126,7 +129,6 @@ public class GameFrame extends JFrame implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        //todo bumper movement
         /*bumper movement*/
         if(!gameOver){
             if (e.getKeyCode() == KeyEvent.VK_LEFT) {
@@ -141,14 +143,22 @@ public class GameFrame extends JFrame implements KeyListener {
             }
         }else{
             if (e.getKeyCode() == KeyEvent.VK_Y) {
-                ballPosX = 300;
-                ballPosY = 300;
+                ballPosX = 490;
+                ballPosY = 550;
                 block = new Block[2000];
                 blockCount = 0;
                 score = 0;
                 motionModifierRandom = random.nextInt(5) - 2;
+                rightleftupdownModifierRandomBool = random.nextBoolean();
                 ballMotionX = 5 + motionModifierRandom;
+                if(rightleftupdownModifierRandomBool){
+                    ballMotionX = -ballMotionX;
+                }
                 ballMotionY = 5 + motionModifierRandom;
+                rightleftupdownModifierRandomBool = random.nextBoolean();
+                if(rightleftupdownModifierRandomBool){
+                    ballMotionY = -ballMotionY;
+                }
                 bumperX = 450;
                 /*readd blocks*/
                 for (int i = 1; i <= 18; i++) {
@@ -183,6 +193,7 @@ public class GameFrame extends JFrame implements KeyListener {
     public static int motionModifierRandom;
     public static boolean gameOver;
 
+    private boolean rightleftupdownModifierRandomBool;
     private Random random;
     private int ballMotionX, ballMotionY;
     private final GamePanel gamePanel;
