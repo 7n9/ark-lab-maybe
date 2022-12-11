@@ -50,10 +50,10 @@ public class GameFrame extends JFrame implements KeyListener {
             public void actionPerformed(ActionEvent e) {
                 if (!gameOver) {
                     //todo ball detections
-                    if(ballPosX <0){
+                    if(ballPosX <2){
                         ballMotionX = -ballMotionX;
                     }
-                    if(ballPosX + 20 > 1000){
+                    if(ballPosX + 20 > 996){
                         ballMotionX = -ballMotionX;
                     }
                     if(ballPosY < 0){
@@ -122,10 +122,14 @@ public class GameFrame extends JFrame implements KeyListener {
         //todo bumper movement
         /*bumper movement*/
         if(e.getKeyCode() == KeyEvent.VK_LEFT){
-            bumperX -= 10;
+            if (bumperX > 2) {
+                bumperX -= 10;
+            }
         }
         if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-            bumperX += 10;
+            if (bumperX < 896) {
+                bumperX += 10;
+            }
         }
     }
 
