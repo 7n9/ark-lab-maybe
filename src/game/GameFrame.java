@@ -85,7 +85,7 @@ public class GameFrame extends JFrame implements KeyListener {
                 gamePanel.repaint();
             }
         };
-        Timer timer = new Timer(50, listener);
+        Timer timer = new Timer(20, listener);
         timer.start();
         pack();
     }
