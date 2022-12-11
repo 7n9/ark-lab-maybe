@@ -31,9 +31,9 @@ public class GamePanel extends JPanel {
         //bumper positioning
         int passBumperX = GameFrame.bumperX;
         if (passBumperX > 900)
-            passBumperX = 900;
+            GameFrame.bumperX = 900;
         if (passBumperX < 0)
-            passBumperX = 0;
+            GameFrame.bumperX = 0;
         bumper.fillRect(passBumperX, 600, 100, 20);
 
         /*blocks*/
