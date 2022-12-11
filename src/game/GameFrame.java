@@ -24,8 +24,14 @@ public class GameFrame extends JFrame implements KeyListener {
         bumperX = 450;
 
 
+        /*add panel to frame*/
         add(gamePanel);
+        /*self-explanatory*/
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        /*no-resize*/
+        setResizable(false);
+        /*title*/
+        setTitle("ArkQnoid");
         /*set dimentions*/
         setSize(1000,700);
         /*center the window*/
