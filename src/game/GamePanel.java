@@ -20,9 +20,9 @@ public class GamePanel extends JPanel {
         ball.setColor(Color.RED);
         ball.fillOval(ballPosX, ballPosY, 20 ,20);
 
-        g.setFont(new Font("MyFont", 20, 20));
+        g.setFont(new Font("Arial", Font.BOLD, 20));
         g.setColor(Color.WHITE);
-        g.drawString("your score : ", 20, 20);
+        g.drawString("Your score : " + GameFrame.score, 20, 20);
 
 
         /*bumper*/

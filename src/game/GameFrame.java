@@ -63,9 +63,13 @@ public class GameFrame extends JFrame implements KeyListener {
                         gameOver = true;
                     }
                     //todo ball begin
+                    //todo random ball start?
+
                     ballPosX += ballMotionX;
                     ballPosY -= ballMotionY;
                     //todo collisions with blocks
+                    //todo maybe add sidehit to blocks?
+
                     /*block collisions*/
                     for(int i = 0; i < blockCount; i++){
                         if(isBallCollidedWithBlock(block[i])){
@@ -89,6 +93,7 @@ public class GameFrame extends JFrame implements KeyListener {
     /*block collidion check*/
     private boolean isBallCollidedWithBlock(Block block){
         if(ballPosY >= block.posY && ballPosY < block.posY + block.blockHeight && ballPosX > block.posX && ballPosX < block.posX + block.blockWidth){
+            score += 1;
             return true;
         }else{
             return false;
