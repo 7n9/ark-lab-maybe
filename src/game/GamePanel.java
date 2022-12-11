@@ -30,7 +30,7 @@ public class GamePanel extends JPanel {
         bumper.setColor(Color.BLUE);
         //bumper positioning
         int passBumperX = GameFrame.bumperX;
-        if (passBumperX > 950)
+        if (passBumperX > 900)
             passBumperX = 900;
         if (passBumperX < 0)
             passBumperX = 0;
