@@ -16,6 +16,12 @@ public class GameFrame extends JFrame implements KeyListener {
         block = new Block[2000];
         gameOver = false;
         blockCount = 0;
+        score = 0;
+        random = new Random(System.currentTimeMillis());
+        ballMotionX = 5;
+        ballMotionY = 5;
+        bumperX = 300;
+
 
         add(gamePanel);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -31,7 +37,7 @@ public class GameFrame extends JFrame implements KeyListener {
         for (int i = 1; i <= 20; i++) {
             for (int j = 1; j <= 10; j++) {
                 block[blockCount] = new Block();
-                block[blockCount].setShapeColor(new Random().nextInt(6) + 1);
+                block[blockCount].setShapeColor(random.nextInt(6) + 1);
                 block[blockCount].posX = i * 45;
                 block[blockCount].posY = j * 25;
                 blockCount++;
@@ -125,11 +131,13 @@ public class GameFrame extends JFrame implements KeyListener {
 
     public static int ballPosX;
     public static int ballPosY;
-    private static GamePanel gamePanel;
+    private final GamePanel gamePanel;
     public static Block[] block;
     public static int blockCount;
-    public static int bumperX = 300;
+    public static int bumperX;
+    public static int score;
 
-    public int ballMotionX = 5, ballMotionY = 5;
+    private Random random;
+    private int ballMotionX, ballMotionY;
     private boolean gameOver;
 }
