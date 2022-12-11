@@ -23,17 +23,18 @@ public class GamePanel extends JPanel {
         g.setFont(new Font("MyFont", 20, 20));
         g.setColor(Color.WHITE);
         g.drawString("your score : ", 20, 20);
+
+
         /*bumper*/
         Graphics bumper = g;
         bumper.setColor(Color.BLUE);
-
-
         //bumper positioning
-        if (bumperX > 950)
-            bumperX = 900;
-        if (bumperX < 0)
-            bumperX = 0;
-        bumper.fillRect(bumperX, 600, 100, 20);
+        int passBumperX = GameFrame.bumperX;
+        if (passBumperX > 950)
+            passBumperX = 900;
+        if (passBumperX < 0)
+            passBumperX = 0;
+        bumper.fillRect(passBumperX, 600, 100, 20);
 
         /*blocks*/
         Graphics block = g;
@@ -48,5 +49,4 @@ public class GamePanel extends JPanel {
 
     }
 
-    public static int bumperX = 300;
 }

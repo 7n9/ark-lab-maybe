@@ -80,7 +80,6 @@ public class GameFrame extends JFrame implements KeyListener {
     /*bumper collision check*/
     private boolean isBallCollidedWithBumper(){
         //bumperx
-        int bumperX = GamePanel.bumperX;
         //ballwidth&height = 20
         if(ballPosX + 20 >= bumperX && ballPosX < bumperX + 100 && ballPosY + 20 > 600){
             return true;
@@ -100,10 +99,10 @@ public class GameFrame extends JFrame implements KeyListener {
         //todo bumper movement
         /*bumper movement*/
         if(e.getKeyCode() == KeyEvent.VK_LEFT){
-            GamePanel.bumperX -= 5;
+            bumperX -= 5;
         }
         if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-            GamePanel.bumperX += 5;
+            bumperX += 5;
         }
     }
 
@@ -118,6 +117,7 @@ public class GameFrame extends JFrame implements KeyListener {
     private static GamePanel gamePanel;
     public static Block[] block;
     public static int blockCount;
+    public static int bumperX = 300;
 
     public int ballMotionX = 5, ballMotionY = 5;
     private boolean gameOver;
