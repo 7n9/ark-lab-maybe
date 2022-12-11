@@ -44,7 +44,18 @@ public class GameFrame extends JFrame implements KeyListener {
             public void actionPerformed(ActionEvent e) {
                 if (!gameOver) {
                     //todo ball detections
-
+                    if(ballPosX <0){
+                        ballMotionX = -ballMotionX;
+                    }
+                    if(ballPosX + 20 > 1000){
+                        ballMotionX = -ballMotionX;
+                    }
+                    if(ballPosY < 0){
+                        ballMotionY = -ballMotionY;
+                    }
+                    if(ballPosY + 20 > 700){
+                        gameOver = true;
+                    }
                     //todo ball begin
                     ballPosX += ballMotionX;
                     ballPosY -= ballMotionY;
