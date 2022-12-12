@@ -13,14 +13,33 @@ public class ArQnoid {
 
 
     public static void main(String[] args) {
+        isDestroyRequested = false;
         desiredWidth = 1000;
         desiredHeight = 700;
         renderGlobal = new RenderGlobal();
         game = new GameClass(renderGlobal, desiredWidth, desiredHeight);
         initDisplay();
         initGL();
+        tickLoop();
         arqLoop();
         cleanUP();
+    }
+
+    private static void tickLoop() {
+        new Thread() {
+
+            @Override
+            public void run() {
+                long lt = System.currentTimeMillis();
+                while(!isDestroyRequested){
+                    if (System.currentTimeMillis() > lt + 20) {
+                        System.out.println("Tick at: " + (System.currentTimeMillis() - lt) + "ms.");
+                        lt = System.currentTimeMillis();
+                        update();
+                    }
+                }
+            }
+        }.start();
     }
 
 
@@ -28,10 +47,10 @@ public class ArQnoid {
     private static void arqLoop(){
         while(!Display.isCloseRequested()){
             getInput();
-            update();
+            //update();
             render();
-
         }
+        isDestroyRequested = true;
     }
 
     private static void getInput() {
@@ -84,4 +103,5 @@ public class ArQnoid {
     private static RenderGlobal renderGlobal;
     private static GameClass game;
     private static int desiredWidth, desiredHeight;
+    private static boolean isDestroyRequested;
 }
