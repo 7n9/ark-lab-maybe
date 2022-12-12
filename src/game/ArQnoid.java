@@ -14,7 +14,7 @@ public class ArQnoid {
 
     public static void main(String[] args) {
         renderGlobal = new RenderGlobal();
-
+        game = new GameClass(renderGlobal);
         initDisplay();
         initGL();
 
@@ -41,16 +41,19 @@ public class ArQnoid {
     }
 
     private static void getInput() {
+        game.getInput();
     }
 
     private static void update() {
+        game.update();
     }
 
     private static void render() {
         glClear(GL_COLOR_BUFFER_BIT);
         glLoadIdentity();
 
-        renderGlobal.drawRectWithColor(450, 300, 100, 100, Color.MAGENTA.getRGB());
+        game.render();
+        //renderGlobal.drawRectWithColor(450, 300, 100, 100, Color.MAGENTA.getRGB());
         //renderGlobal.drawCircle(100, 100, 30, Color.HSBtoRGB((System.currentTimeMillis() % 10000L)/10000.0f, 0.55f, 0.95f));
 
         Display.update();
@@ -85,4 +88,5 @@ public class ArQnoid {
 
 
     private static RenderGlobal renderGlobal;
+    private static GameClass game;
 }
