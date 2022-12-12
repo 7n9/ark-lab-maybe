@@ -1,8 +1,19 @@
 package game.elements;
 
+import game.RenderGlobal;
+
 import java.awt.*;
 
 public class Block {
+
+    public void render(RenderGlobal renderGlobal){
+            renderGlobal.drawRectWithColor(posX, posY, blockWidth, blockHeight, getShapeColor().getRGB());
+    }
+
+    public void setPosX(int pos){
+        this.posX = pos;
+    }
+
     public void setShapeColor(int colorInt){
         switch (colorInt) {
             case 1:
@@ -30,6 +41,8 @@ public class Block {
     public Color getShapeColor(){
         return this.shapeColor;
     }
+
+
     public int blockWidth = 50, blockHeight = 20;
     public int posX, posY;
     private Color shapeColor = new Color(0.0F, 0.0F, 0.0F);

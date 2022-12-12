@@ -1,6 +1,7 @@
 package game;
 
 import game.elements.Block;
+import game.elements.Bumper;
 import org.lwjgl.opengl.Display;
 
 import java.awt.*;
@@ -20,6 +21,9 @@ public class GameClass {
         blockCount = 0;
         random = new Random(System.currentTimeMillis());
         addBlocks();
+
+        bumper = new Bumper(renderGlobal);
+        bumper.setPosX(width/2.0f - (float)bumper.getBumperWidth()/2);
     }
 
 
@@ -32,10 +36,12 @@ public class GameClass {
     }
 
     public void render() {
+
         for (int i = 0; i < blockCount; i++) {
-            Block renderedBlock = block[i];
-            renderGlobal.drawRectWithColor(renderedBlock.posX, renderedBlock.posY, renderedBlock.blockWidth, renderedBlock.blockHeight, renderedBlock.getShapeColor().getRGB());
+            block[i].render(renderGlobal);
         }
+
+        bumper.render();
     }
 
 
@@ -57,5 +63,6 @@ public class GameClass {
 
     private RenderGlobal renderGlobal;
     private Random random;
+    private Bumper bumper;
     private int width, height;
 }
