@@ -1,16 +1,11 @@
 package game;
 
+import game.elements.Ball;
 import game.elements.Block;
 import game.elements.Bumper;
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.Display;
-
-import java.awt.*;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import static org.lwjgl.opengl.GL11.*;
 
 public class GameClass {
 
@@ -25,20 +20,26 @@ public class GameClass {
 
         bumper = new Bumper(renderGlobal);
         bumper.setPosX(width/2.0f - (float)bumper.getBumperWidth()/2);
+
+        ball = new Ball(renderGlobal, bumper);
     }
 
 
     public void getInput() {
         if(Keyboard.isKeyDown(Keyboard.KEY_LEFT) && bumper.getPosX() > 0){
-            bumper.incrementPosX(-2.5f);
+            bumper.incrementPosX(-4.5f);
         }
         if(Keyboard.isKeyDown(Keyboard.KEY_RIGHT) && bumper.getPosX() < width - bumper.getBumperWidth()){
-            bumper.incrementPosX(2.5f);
+            bumper.incrementPosX(4.5f);
         }
     }
 
-    public void update() {
+    public void updateOnTick() {
+        ball.updateOnTick();
+    }
 
+    public void updateOnFrame() {
+        ball.updateOnFrame(block, blockCount);
     }
 
     public void render() {
@@ -46,6 +47,7 @@ public class GameClass {
             block[i].render(renderGlobal);
         }
         bumper.render();
+        ball.render();
     }
 
 
@@ -64,9 +66,12 @@ public class GameClass {
 
     private Block block[];
     private int blockCount;
-
     private RenderGlobal renderGlobal;
     private Random random;
     private Bumper bumper;
+    private Ball ball;
     private int width, height;
+    private boolean isGameOver;
+
+
 }

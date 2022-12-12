@@ -9,14 +9,20 @@ public class Bumper {
     public Bumper(RenderGlobal rg){
         this.renderGlobal = rg;
         bumperWidth = 100;
+        bumperHeight = 20;
+        posY = 30;
     }
 
     public void render() {
-        renderGlobal.drawRectWithColor(posX, 50, bumperWidth, 20, Color.BLUE.getRGB());
+        renderGlobal.drawRectWithColor(posX, posY, bumperWidth, bumperHeight, Color.BLUE.getRGB());
     }
 
     public float getPosX(){
         return posX;
+    }
+
+    public float getPosY(){
+        return posY;
     }
 
     public void setPosX(float pos){
@@ -31,8 +37,12 @@ public class Bumper {
         return bumperWidth;
     }
 
-    private float posX;
-    private int bumperWidth;
+    public int getBumperHeight(){
+        return bumperHeight;
+    }
+
+    private float posX, posY;
+    private int bumperWidth, bumperHeight;
     private RenderGlobal renderGlobal;
 
 

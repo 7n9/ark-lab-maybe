@@ -5,7 +5,6 @@ import org.lwjgl.opengl.DisplayMode;
 import static org.lwjgl.opengl.GL11.*;
 
 
-import java.awt.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,10 +31,10 @@ public class ArQnoid {
             public void run() {
                 long lt = System.currentTimeMillis();
                 while(!isDestroyRequested){
-                    if (System.currentTimeMillis() > lt + 20) {
+                    if (System.currentTimeMillis() > lt + 2) {
                         System.out.println("Tick at: " + (System.currentTimeMillis() - lt) + "ms.");
                         lt = System.currentTimeMillis();
-                        update();
+                        updateOnTick();
                     }
                 }
             }
@@ -47,7 +46,7 @@ public class ArQnoid {
     private static void arqLoop(){
         while(!Display.isCloseRequested()){
             getInput();
-            //update();
+            updateOnFrame();
             render();
         }
         isDestroyRequested = true;
@@ -57,8 +56,12 @@ public class ArQnoid {
         game.getInput();
     }
 
-    private static void update() {
-        game.update();
+    private static void updateOnTick() {
+        game.updateOnTick();
+    }
+
+    private static void updateOnFrame(){
+        game.updateOnFrame();
     }
 
     private static void render() {
