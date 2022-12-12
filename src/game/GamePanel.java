@@ -1,5 +1,7 @@
 package game;
 
+import game.elements.Block;
+
 import javax.swing.*;
 import java.awt.*;
 

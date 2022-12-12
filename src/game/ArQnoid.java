@@ -13,19 +13,13 @@ public class ArQnoid {
 
 
     public static void main(String[] args) {
+        desiredWidth = 1000;
+        desiredHeight = 700;
         renderGlobal = new RenderGlobal();
-        game = new GameClass(renderGlobal);
+        game = new GameClass(renderGlobal, desiredWidth, desiredHeight);
         initDisplay();
         initGL();
-
         arqLoop();
-
-//        EventQueue.invokeLater(new Runnable() {
-//            @Override
-//            public void run() {
-//                new GameFrame();
-//            }
-//        });
         cleanUP();
     }
 
@@ -71,7 +65,7 @@ public class ArQnoid {
 
     private static void initDisplay() {
         try{
-            Display.setDisplayMode(new DisplayMode(1000, 700));
+            Display.setDisplayMode(new DisplayMode(desiredWidth, desiredHeight));
             Display.setResizable(false);
             Display.create();
             Display.setTitle("ArQnoid");
@@ -89,4 +83,5 @@ public class ArQnoid {
 
     private static RenderGlobal renderGlobal;
     private static GameClass game;
+    private static int desiredWidth, desiredHeight;
 }
