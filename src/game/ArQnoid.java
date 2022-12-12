@@ -1,17 +1,15 @@
 package game;
 
-import game.GameFrame;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import static org.lwjgl.opengl.GL11.*;
 
-import javax.swing.JFrame;
+
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class main{
+public class ArQnoid {
 
 
     public static void main(String[] args) {
@@ -52,9 +50,8 @@ public class main{
         glClear(GL_COLOR_BUFFER_BIT);
         glLoadIdentity();
 
-        glColor3f(0.25f, 0.5f, 0.2f);
-
-        renderGlobal.drawRect(20, 20, 10, 100);
+        renderGlobal.drawRectWithColor(450, 300, 100, 100, Color.MAGENTA.getRGB());
+        //renderGlobal.drawCircle(100, 100, 30, Color.HSBtoRGB((System.currentTimeMillis() % 10000L)/10000.0f, 0.55f, 0.95f));
 
         Display.update();
     }
@@ -74,10 +71,11 @@ public class main{
             Display.setDisplayMode(new DisplayMode(1000, 700));
             Display.setResizable(false);
             Display.create();
+            Display.setTitle("ArQnoid");
             Display.setVSyncEnabled(true);
         }catch(Exception e){
             //e.printStackTrace();
-            Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(ArQnoid.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
