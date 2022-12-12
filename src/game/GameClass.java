@@ -2,6 +2,7 @@ package game;
 
 import game.elements.Block;
 import game.elements.Bumper;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
 import java.awt.*;
@@ -28,7 +29,12 @@ public class GameClass {
 
 
     public void getInput() {
-
+        if(Keyboard.isKeyDown(Keyboard.KEY_LEFT) && bumper.getPosX() > 0){
+            bumper.incrementPosX(-2.5f);
+        }
+        if(Keyboard.isKeyDown(Keyboard.KEY_RIGHT) && bumper.getPosX() < width - bumper.getBumperWidth()){
+            bumper.incrementPosX(2.5f);
+        }
     }
 
     public void update() {
@@ -36,11 +42,9 @@ public class GameClass {
     }
 
     public void render() {
-
         for (int i = 0; i < blockCount; i++) {
             block[i].render(renderGlobal);
         }
-
         bumper.render();
     }
 
