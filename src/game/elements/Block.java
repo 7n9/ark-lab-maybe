@@ -1,10 +1,15 @@
 package game.elements;
 
+import game.AABB;
 import game.RenderGlobal;
 
 import java.awt.*;
 
 public class Block {
+
+    public Block(){
+        axisAligned = new AABB(posX, posY, posX + blockWidth, posY + blockHeight);
+    }
 
     public void render(RenderGlobal renderGlobal){
             renderGlobal.drawRectWithColor(posX, posY, blockWidth, blockHeight, getShapeColor().getRGB());
@@ -42,8 +47,12 @@ public class Block {
         return this.shapeColor;
     }
 
+    public AABB getAABB(){
+        return axisAligned;
+    }
 
     public int blockWidth = 50, blockHeight = 20;
     public int posX, posY;
     private Color shapeColor = new Color(0.0F, 0.0F, 0.0F);
+    private AABB axisAligned;
 }

@@ -1,5 +1,6 @@
 package game.elements;
 
+import game.AABB;
 import game.RenderGlobal;
 
 import java.awt.*;
@@ -7,14 +8,15 @@ import java.awt.*;
 public class Ball {
 
     public Ball(RenderGlobal rg, Bumper b){
+        axisAligned = new AABB(posX - ballRadius, posY - ballRadius, posX + ballRadius, posY + ballRadius);
         renderGlobal = rg;
         bumper = b;
         ballCircumference = 20.0f;
         ballRadius = ballCircumference/2.0f;
         posX = 500 - ballRadius;
         posY = 200;
-        motionX = 0.5f;
-        motionY = 0.5f;
+        motionX = 1.5f;
+        motionY = 1.5f;
     }
 
     public void updateOnTick(){
@@ -25,16 +27,16 @@ public class Ball {
         posY += motionY;
         posX += motionX;
 
-        if(posX <= 0){
+        if(posX - ballRadius <= 0){
             motionX = -motionX;
         }
-        if(posX + ballCircumference >= 1000){
+        if(posX + ballRadius >= 1000){
             motionX = -motionX;
         }
-        if(posY + ballCircumference >= 700){
+        if(posY + ballRadius >= 700){
             motionY = -motionY;
         }
-        if(posY <= 0){
+        if(posY - ballRadius <= 0){
             motionY = -motionY;
         }
 
@@ -42,6 +44,9 @@ public class Ball {
             if(isBallCollidedWithBlock(block[i])){
                 block[i].setPosX(-100);
                 motionY = -motionY;
+            }
+            if(axisAligned.intersectsWith(block[i].getAABB())){
+                System.out.println("AXIS COLLIDED");
             }
         }
 
@@ -53,12 +58,13 @@ public class Ball {
     public void render(){
         renderGlobal.drawCircle(posX, posY, ballRadius, Color.RED.getRGB());
         renderGlobal.drawCircle(posX, posY, 2, Color.WHITE.getRGB());
+        renderGlobal.drawRectWithColor(posX - ballRadius, posY - ballRadius, ballRadius*2, ballRadius*2, 0x1Affffff);
     }
 
     //todo fix collisions (ball center IN CENTER)
     private boolean isBallCollidedWithBlock(Block block){
 
-        if(posY >= block.posY && posY < block.posY + block.blockHeight && posX > block.posX && posX < block.posX + block.blockWidth){
+        if(posY + ballRadius >= block.posY && posY - ballRadius < block.posY + block.blockHeight && posX + ballRadius > block.posX && posX - ballRadius < block.posX + block.blockWidth){
             return true;
         }else{
             return false;
@@ -67,7 +73,7 @@ public class Ball {
     }
     /*bumper collision check*/
     private boolean isBallCollidedWithBumper(Bumper bumper){
-        if(posX >= bumper.getPosX() && posX <= bumper.getPosX() + bumper.getBumperWidth() && posY <= bumper.getPosY() + bumper.getBumperHeight() && posY >= bumper.getPosY()){
+        if(posX + ballRadius >= bumper.getPosX() && posX - ballRadius <= bumper.getPosX() + bumper.getBumperWidth() && posY - ballRadius <= bumper.getPosY() + bumper.getBumperHeight() && posY + ballRadius >= bumper.getPosY()){
             return true;
         }else{
             return false;
@@ -79,6 +85,7 @@ public class Ball {
     private float ballRadius, ballCircumference;
     private RenderGlobal renderGlobal;
     private Bumper bumper;
+    private AABB axisAligned;
 
 
 }
