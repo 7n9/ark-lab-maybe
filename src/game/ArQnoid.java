@@ -12,7 +12,6 @@ public class ArQnoid {
 
 
     public static void main(String[] args) {
-        isDestroyRequested = false;
         desiredWidth = 1000;
         desiredHeight = 700;
         renderGlobal = new RenderGlobal();
@@ -30,7 +29,6 @@ public class ArQnoid {
             updateOnFrame();
             render();
         }
-        isDestroyRequested = true;
     }
 
     private static void getInput() {
@@ -83,5 +81,4 @@ public class ArQnoid {
     private static RenderGlobal renderGlobal;
     private static GameClass game;
     private static int desiredWidth, desiredHeight;
-    private static boolean isDestroyRequested;
 }
