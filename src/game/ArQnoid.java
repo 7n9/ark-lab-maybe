@@ -25,6 +25,7 @@ public class ArQnoid {
 
     private static void arqLoop(){
         while(!Display.isCloseRequested()){
+            Display.sync(60);
             getInput();
             updateOnFrame();
             render();
@@ -67,7 +68,7 @@ public class ArQnoid {
             Display.setResizable(false);
             Display.create();
             Display.setTitle("ArQnoid");
-            Display.setVSyncEnabled(true);
+            //Display.setVSyncEnabled(true);
         }catch(Exception e){
             //e.printStackTrace();
             Logger.getLogger(ArQnoid.class.getName()).log(Level.SEVERE, null, e);
