@@ -8,24 +8,23 @@ import java.awt.*;
 public class Ball {
 
     public Ball(RenderGlobal rg, Bumper b){
-        axisAligned = new AABB(posX - ballRadius, posY - ballRadius, posX + ballRadius, posY + ballRadius);
         renderGlobal = rg;
         bumper = b;
         ballCircumference = 20.0f;
         ballRadius = ballCircumference/2.0f;
         posX = 500 - ballRadius;
         posY = 200;
-        motionX = 1.5f;
-        motionY = 1.5f;
+        motionX = 0.5f;
+        motionY = 0.5f;
+        axisAligned = new AABB(posX - ballRadius, posY - ballRadius, posX + ballRadius, posY + ballRadius);
     }
 
-    public void updateOnTick(){
-
-    }
 
     public void updateOnFrame(Block[] block, int blockCount) {
         posY += motionY;
         posX += motionX;
+
+        axisAligned.setAABB(posX - ballRadius, posY - ballRadius, posX + ballRadius, posY + ballRadius);
 
         if(posX - ballRadius <= 0){
             motionX = -motionX;
@@ -41,12 +40,10 @@ public class Ball {
         }
 
         for(int i = 0; i < blockCount; i++){
-            if(isBallCollidedWithBlock(block[i])){
+            if(axisAligned.intersects(block[i].getAABB())){
                 block[i].setPosX(-100);
+                block[i].getAABB().setAABB(0, 0, 0, 0);
                 motionY = -motionY;
-            }
-            if(axisAligned.intersectsWith(block[i].getAABB())){
-                System.out.println("AXIS COLLIDED");
             }
         }
 
@@ -61,17 +58,6 @@ public class Ball {
         renderGlobal.drawRectWithColor(posX - ballRadius, posY - ballRadius, ballRadius*2, ballRadius*2, 0x1Affffff);
     }
 
-    //todo fix collisions (ball center IN CENTER)
-    private boolean isBallCollidedWithBlock(Block block){
-
-        if(posY + ballRadius >= block.posY && posY - ballRadius < block.posY + block.blockHeight && posX + ballRadius > block.posX && posX - ballRadius < block.posX + block.blockWidth){
-            return true;
-        }else{
-            return false;
-        }
-
-    }
-    /*bumper collision check*/
     private boolean isBallCollidedWithBumper(Bumper bumper){
         if(posX + ballRadius >= bumper.getPosX() && posX - ballRadius <= bumper.getPosX() + bumper.getBumperWidth() && posY - ballRadius <= bumper.getPosY() + bumper.getBumperHeight() && posY + ballRadius >= bumper.getPosY()){
             return true;

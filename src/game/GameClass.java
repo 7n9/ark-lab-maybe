@@ -34,9 +34,6 @@ public class GameClass {
         }
     }
 
-    public void updateOnTick() {
-        ball.updateOnTick();
-    }
 
     public void updateOnFrame() {
         ball.updateOnFrame(block, blockCount);
@@ -58,6 +55,7 @@ public class GameClass {
                 block[blockCount].setShapeColor(random.nextInt(6) + 1);
                 block[blockCount].posX = -48 + i * 55;//48.5, half a pixel diff?
                 block[blockCount].posY = height - (30 + j * 25);
+                block[blockCount].getAABB().setAABB(-48 + i * 55, height - (30 + j * 25), -48 + i * 55 + block[blockCount].blockWidth, height - (30 + j * 25) + block[blockCount].blockHeight);
                 blockCount++;
             }
         }

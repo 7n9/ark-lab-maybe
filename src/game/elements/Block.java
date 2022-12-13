@@ -8,7 +8,7 @@ import java.awt.*;
 public class Block {
 
     public Block(){
-        axisAligned = new AABB(posX, posY, posX + blockWidth, posY + blockHeight);
+        axisAligned = new AABB(0, 0, 0, 0);
     }
 
     public void render(RenderGlobal renderGlobal){

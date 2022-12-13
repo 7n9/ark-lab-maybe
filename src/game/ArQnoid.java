@@ -19,29 +19,9 @@ public class ArQnoid {
         game = new GameClass(renderGlobal, desiredWidth, desiredHeight);
         initDisplay();
         initGL();
-        tickLoop();
         arqLoop();
         cleanUP();
     }
-
-    private static void tickLoop() {
-        new Thread() {
-
-            @Override
-            public void run() {
-                long lt = System.currentTimeMillis();
-                while(!isDestroyRequested){
-                    if (System.currentTimeMillis() > lt + 2) {
-                        System.out.println("Tick at: " + (System.currentTimeMillis() - lt) + "ms.");
-                        lt = System.currentTimeMillis();
-                        updateOnTick();
-                    }
-                }
-            }
-        }.start();
-    }
-
-
 
     private static void arqLoop(){
         while(!Display.isCloseRequested()){
@@ -54,10 +34,6 @@ public class ArQnoid {
 
     private static void getInput() {
         game.getInput();
-    }
-
-    private static void updateOnTick() {
-        game.updateOnTick();
     }
 
     private static void updateOnFrame(){
