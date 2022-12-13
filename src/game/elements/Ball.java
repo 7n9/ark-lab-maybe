@@ -14,8 +14,8 @@ public class Ball {
         ballRadius = ballCircumference/2.0f;
         posX = 500 - ballRadius;
         posY = 200;
-        motionX = 0.5f;
-        motionY = 0.5f;
+        motionX = 1.5f;
+        motionY = 1.5f;
         axisAligned = new AABB(posX - ballRadius, posY - ballRadius, posX + ballRadius, posY + ballRadius);
     }
 
@@ -26,16 +26,16 @@ public class Ball {
 
         axisAligned.setAABB(posX - ballRadius, posY - ballRadius, posX + ballRadius, posY + ballRadius);
 
-        if(posX - ballRadius <= 0){
+        if(posX - ballRadius <= 2){
             motionX = -motionX;
         }
-        if(posX + ballRadius >= 1000){
+        if(posX + ballRadius >= 996){
             motionX = -motionX;
         }
-        if(posY + ballRadius >= 700){
+        if(posY + ballRadius >= 696){
             motionY = -motionY;
         }
-        if(posY - ballRadius <= 0){
+        if(posY - ballRadius <= 2){
             motionY = -motionY;
         }
 
@@ -46,7 +46,7 @@ public class Ball {
                 motionY = -motionY;
             }
         }
-
+        //todo collisions still
         if(isBallCollidedWithBumper(bumper)){
             motionY = -motionY;
         }

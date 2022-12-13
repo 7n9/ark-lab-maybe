@@ -4,6 +4,8 @@ import game.elements.Ball;
 import game.elements.Block;
 import game.elements.Bumper;
 import org.lwjgl.input.Keyboard;
+import java.awt.Color;
+
 import java.util.Random;
 
 
@@ -26,11 +28,11 @@ public class GameClass {
 
 
     public void getInput() {
-        if(Keyboard.isKeyDown(Keyboard.KEY_LEFT) && bumper.getPosX() > 0){
-            bumper.incrementPosX(-4.5f);
+        if(Keyboard.isKeyDown(Keyboard.KEY_LEFT) && bumper.getPosX() > 2){
+            bumper.incrementPosX(-4.0f);
         }
-        if(Keyboard.isKeyDown(Keyboard.KEY_RIGHT) && bumper.getPosX() < width - bumper.getBumperWidth()){
-            bumper.incrementPosX(4.5f);
+        if(Keyboard.isKeyDown(Keyboard.KEY_RIGHT) && bumper.getPosX() < width - bumper.getBumperWidth() - 4.0f){
+            bumper.incrementPosX(4.0f);
         }
     }
 
@@ -40,6 +42,11 @@ public class GameClass {
     }
 
     public void render() {
+        rainbow = new Color(Color.HSBtoRGB((System.currentTimeMillis() % 1000L) / 1000.0F, 0.55F, 0.55F), false);
+
+        renderGlobal.drawFilledRectWithColor(0, 0, width, height, rainbow.getRGB());
+        renderGlobal.drawFilledRectWithColor(2, 2, width - 4, height - 4, Color.black.getRGB());
+
         for (int i = 0; i < blockCount; i++) {
             block[i].render(renderGlobal);
         }
@@ -70,6 +77,7 @@ public class GameClass {
     private Ball ball;
     private int width, height;
     private boolean isGameOver;
+    private Color rainbow;
 
 
 }
