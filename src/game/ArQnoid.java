@@ -69,7 +69,7 @@ public class ArQnoid {
             //Display.setVSyncEnabled(true);
         }catch(Exception e){
             //e.printStackTrace();
-            Logger.getLogger(ArQnoid.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(ArQnoid.class.getName()).log(Level.SEVERE, "Display initialization failure.", e);
         }
     }
 
