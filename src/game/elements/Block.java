@@ -12,7 +12,10 @@ public class Block {
     }
 
     public void render(RenderGlobal renderGlobal){
-            renderGlobal.drawRectWithColor(posX, posY, blockWidth, blockHeight, getShapeColor().getRGB());
+        rainbow = new Color(Color.HSBtoRGB((System.currentTimeMillis() % 1000L) / 1000.0F, 0.55F, 0.95F), false);
+
+        renderGlobal.drawFilledRectWithColor(posX, posY, blockWidth, blockHeight, getShapeColor().getRGB());
+        renderGlobal.drawHollowRectWithColor(posX+1, posY+1, blockWidth-1, blockHeight-1, 1.0F, rainbow.getRGB());
     }
 
     public void setPosX(int pos){
@@ -55,4 +58,5 @@ public class Block {
     public int posX, posY;
     private Color shapeColor = new Color(0.0F, 0.0F, 0.0F);
     private AABB axisAligned;
+    private Color rainbow;
 }

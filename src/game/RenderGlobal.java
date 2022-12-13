@@ -6,7 +6,7 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class RenderGlobal {
 
-    public void drawRect(float x, float y, float width, float height) {
+    public void drawFilledRect(float x, float y, float width, float height) {
         glPushMatrix();
 
         glTranslatef(x, y, 0);
@@ -19,24 +19,43 @@ public class RenderGlobal {
         glPopMatrix();
     }
 
-    public void drawRectWithColor(float x, float y, float width, float height, int color) {
+    public void drawFilledRectWithColor(float x, float y, float width, float height, int color) {
 
         float alpha = ((color >> 24) & 0xff) / 255F;
         float red = ((color >> 16) & 0xff) / 255F;
         float green = ((color >> 8) & 0xff) / 255F;
         float blue = (color & 0xff) / 255F;
-
-        glPushMatrix();
         glColor4f(red, green, blue, alpha);
-        glTranslatef(x, y, 0);
-        glBegin(GL_QUADS);
+
+        drawFilledRect( x, y, width, height);
+    }
+
+
+    public void drawHollowRect(float x, float y, float width, float height, float thickness){
+        glPushMatrix();
+
+        glTranslatef(x - 0.5f, y - 0.5f, 0);//shift to hit pixel
+        glBegin(GL_LINE_LOOP);
+        glLineWidth(thickness);
         glVertex2f(0, 0);
         glVertex2f(0, height);
         glVertex2f(width, height);
         glVertex2f(width, 0);
         glEnd();
+
         glPopMatrix();
     }
+
+    public void drawHollowRectWithColor(float x, float y, float width, float height, float thickness, int color){
+        float alpha = ((color >> 24) & 0xff) / 255F;
+        float red = ((color >> 16) & 0xff) / 255F;
+        float green = ((color >> 8) & 0xff) / 255F;
+        float blue = (color & 0xff) / 255F;
+        glColor4f(red, green, blue, alpha);
+
+        drawHollowRect(x, y, width, height, thickness);
+    }
+
 
 
     public void drawCircle(double x, double y, double radius, int color) {

@@ -14,7 +14,7 @@ public class Bumper {
     }
 
     public void render() {
-        renderGlobal.drawRectWithColor(posX, posY, bumperWidth, bumperHeight, Color.BLUE.getRGB());
+        renderGlobal.drawFilledRectWithColor(posX, posY, bumperWidth, bumperHeight, Color.BLUE.getRGB());
     }
 
     public float getPosX(){

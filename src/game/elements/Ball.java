@@ -55,7 +55,6 @@ public class Ball {
     public void render(){
         renderGlobal.drawCircle(posX, posY, ballRadius, Color.RED.getRGB());
         renderGlobal.drawCircle(posX, posY, 2, Color.WHITE.getRGB());
-        renderGlobal.drawRectWithColor(posX - ballRadius, posY - ballRadius, ballRadius*2, ballRadius*2, 0x1Affffff);
     }
 
     private boolean isBallCollidedWithBumper(Bumper bumper){
