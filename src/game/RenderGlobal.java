@@ -25,9 +25,12 @@ public class RenderGlobal {
         float red = ((color >> 16) & 0xff) / 255F;
         float green = ((color >> 8) & 0xff) / 255F;
         float blue = (color & 0xff) / 255F;
-        glColor4f(red, green, blue, alpha);
 
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glColor4f(red, green, blue, alpha);
         drawFilledRect( x, y, width, height);
+        glDisable(GL_BLEND);
     }
 
 
@@ -51,7 +54,11 @@ public class RenderGlobal {
         float red = ((color >> 16) & 0xff) / 255F;
         float green = ((color >> 8) & 0xff) / 255F;
         float blue = (color & 0xff) / 255F;
+
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glColor4f(red, green, blue, alpha);
+        glDisable(GL_BLEND);
 
         drawHollowRect(x, y, width, height, thickness);
     }
