@@ -13,7 +13,7 @@ public class Ball {
         ballCircumference = 20.0f;
         ballRadius = ballCircumference/2.0f;
         posX = 500 - ballRadius;
-        posY = 200;
+        posY = 600;
         motionX = 1.5f;
         motionY = 1.5f;
         axisAligned = new AABB(posX - ballRadius, posY - ballRadius, posX + ballRadius, posY + ballRadius);

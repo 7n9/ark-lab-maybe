@@ -10,7 +10,7 @@ public class Bumper {
         this.renderGlobal = rg;
         bumperWidth = 100;
         bumperHeight = 20;
-        posY = 30;
+        posY = 670;
     }
 
     public void render() {

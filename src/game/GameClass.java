@@ -3,10 +3,17 @@ package game;
 import game.elements.Ball;
 import game.elements.Block;
 import game.elements.Bumper;
+
+import org.lwjgl.examples.Game;
 import org.lwjgl.input.Keyboard;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.UnicodeFont;
+
 import java.awt.Color;
 
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class GameClass {
@@ -42,7 +49,7 @@ public class GameClass {
     }
 
     public void render() {
-        rainbow = new Color(Color.HSBtoRGB((System.currentTimeMillis() % 1000L) / 1000.0F, 0.55F, 0.55F), false);
+        rainbow = new Color(Color.HSBtoRGB((System.currentTimeMillis() % 1000L) / 1000.0F, 0.55F, 0.45F), false);
 
         renderGlobal.drawFilledRectWithColor(0, 0, width, height, rainbow.getRGB());
         renderGlobal.drawFilledRectWithColor(2, 2, width - 4, height - 4, Color.black.getRGB());
@@ -52,6 +59,9 @@ public class GameClass {
         }
         bumper.render();
         ball.render();
+    
+        renderGlobal.drawFont(10.0f, 10.0f, 30, "Score: ", org.newdawn.slick.Color.pink);
+    
     }
 
 
@@ -61,8 +71,8 @@ public class GameClass {
                 block[blockCount] = new Block();
                 block[blockCount].setShapeColor(random.nextInt(6) + 1);
                 block[blockCount].posX = -48 + i * 55;//48.5, half a pixel diff?
-                block[blockCount].posY = height - (30 + j * 25);
-                block[blockCount].getAABB().setAABB(-48 + i * 55, height - (30 + j * 25), -48 + i * 55 + block[blockCount].blockWidth, height - (30 + j * 25) + block[blockCount].blockHeight);
+                block[blockCount].posY = 30 + j * 25;
+                block[blockCount].getAABB().setAABB(-48 + i * 55, 30 + j * 25, -48 + i * 55 + block[blockCount].blockWidth, 30 + j * 25 + block[blockCount].blockHeight);
                 blockCount++;
             }
         }
@@ -78,6 +88,4 @@ public class GameClass {
     private int width, height;
     private boolean isGameOver;
     private Color rainbow;
-
-
 }

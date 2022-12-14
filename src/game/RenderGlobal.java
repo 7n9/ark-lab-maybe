@@ -1,11 +1,17 @@
 package game;
 
 import org.lwjgl.opengl.GL11;
+import org.newdawn.slick.*;
+import org.newdawn.slick.font.effects.ColorEffect;
 
 import static org.lwjgl.opengl.GL11.*;
 
 public class RenderGlobal {
 
+    public RenderGlobal(){
+        initFont(oldFontSize);
+
+    }
     public void drawFilledRect(float x, float y, float width, float height) {
         glPushMatrix();
 
@@ -88,4 +94,40 @@ public class RenderGlobal {
         glEnable(GL_TEXTURE_2D);
         glDisable(GL_BLEND);
     }
+
+
+    public void initFont(int size){
+        font = null;
+        try {
+            font = new UnicodeFont("src/game/font/Vogue.ttf", size, false, false);
+            font.getEffects().add(new ColorEffect(java.awt.Color.white)); // set the default color to white
+            font.addAsciiGlyphs();
+            font.loadGlyphs(); // load glyphs from font file
+        } catch (SlickException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void drawFont(float posx, float posy, int size, String text, Color color){
+
+        if(size != oldFontSize){
+            initFont(size);
+        }
+
+        glPushMatrix();
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glDisable(GL_DEPTH_TEST);
+        glEnable(GL_TEXTURE_2D);
+
+        font.drawString(posx, posy, text, color);
+
+        glDisable(GL_TEXTURE_2D);
+        glDisable(GL_DEPTH_TEST);
+        glDisable(GL_BLEND);
+        glPopMatrix();
+    }
+
+    private UnicodeFont font;
+    private int oldFontSize = 30;
 }

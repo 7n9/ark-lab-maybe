@@ -12,7 +12,7 @@ public class Block {
     }
 
     public void render(RenderGlobal renderGlobal){
-        rainbow = new Color(Color.HSBtoRGB((System.currentTimeMillis() % 1000L) / 1000.0F, 0.55F, 0.95F), false);
+        rainbow = new Color(Color.HSBtoRGB((System.currentTimeMillis() % 1000L) / 1000.0F, 0.55F, 0.45F), false);
 
         renderGlobal.drawFilledRectWithColor(posX, posY, blockWidth, blockHeight, getShapeColor().getRGB());
         renderGlobal.drawHollowRectWithColor(posX+1, posY+1, blockWidth-1, blockHeight-1, 1.0F, rainbow.getRGB());

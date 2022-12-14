@@ -14,10 +14,11 @@ public class ArQnoid {
     public static void main(String[] args) {
         desiredWidth = 1000;
         desiredHeight = 700;
-        renderGlobal = new RenderGlobal();
-        game = new GameClass(renderGlobal, desiredWidth, desiredHeight);
         initDisplay();
         initGL();
+        /*initgl/prevent GL not initialized exception*/
+        renderGlobal = new RenderGlobal();
+        game = new GameClass(renderGlobal, desiredWidth, desiredHeight);
         arqLoop();
         cleanUP();
     }
@@ -53,7 +54,7 @@ public class ArQnoid {
     private static void initGL() {
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        glOrtho(0, Display.getWidth(), 0, Display.getHeight(), -1, 1);
+        glOrtho(0, Display.getWidth(), Display.getHeight(), 0, -1, 1);
         glMatrixMode(GL_MODELVIEW);
         glClearColor(0, 0, 0, 1);
         glDisable(GL_DEPTH_TEST);
