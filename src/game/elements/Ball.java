@@ -1,15 +1,17 @@
 package game.elements;
 
 import game.AABB;
+import game.GameClass;
 import game.RenderGlobal;
 
 import java.awt.*;
 
 public class Ball {
 
-    public Ball(RenderGlobal rg, Bumper b){
+    public Ball(RenderGlobal rg, Bumper b, GameClass gameClass){
         renderGlobal = rg;
         bumper = b;
+        this.gameClass = gameClass;
         ballCircumference = 20.0f;
         ballRadius = ballCircumference/2.0f;
         posX = 500 - ballRadius;
@@ -44,6 +46,7 @@ public class Ball {
                 block[i].setPosX(-100);
                 block[i].getAABB().setAABB(0, 0, 0, 0);
                 motionY = -motionY;
+                gameClass.addScore(1);
             }
         }
         //todo collisions still
@@ -71,6 +74,7 @@ public class Ball {
     private RenderGlobal renderGlobal;
     private Bumper bumper;
     private AABB axisAligned;
+    private GameClass gameClass;
 
 
 }

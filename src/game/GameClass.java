@@ -24,13 +24,14 @@ public class GameClass {
         this.height = windowHeight;
         block = new Block[2000];
         blockCount = 0;
+        score = 0;
         random = new Random(System.currentTimeMillis());
         addBlocks();
 
         bumper = new Bumper(renderGlobal);
         bumper.setPosX(width/2.0f - (float)bumper.getBumperWidth()/2);
 
-        ball = new Ball(renderGlobal, bumper);
+        ball = new Ball(renderGlobal, bumper, this);
     }
 
 
@@ -60,7 +61,7 @@ public class GameClass {
         bumper.render();
         ball.render();
     
-        renderGlobal.drawFont(10.0f, 10.0f, 30, "Score: ", org.newdawn.slick.Color.pink);
+        renderGlobal.drawFont(10.0f, 10.0f, 30, "Score: " + score, org.newdawn.slick.Color.pink);
     
     }
 
@@ -79,6 +80,10 @@ public class GameClass {
     }
 
 
+    public void addScore(int amount){
+        score += amount;
+    }
+
     private Block block[];
     private int blockCount;
     private RenderGlobal renderGlobal;
@@ -86,6 +91,7 @@ public class GameClass {
     private Bumper bumper;
     private Ball ball;
     private int width, height;
+    private int score;
     private boolean isGameOver;
     private Color rainbow;
 }
