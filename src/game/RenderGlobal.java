@@ -9,9 +9,9 @@ import static org.lwjgl.opengl.GL11.*;
 public class RenderGlobal {
 
     public RenderGlobal(){
-        initFont(oldFontSize);
-
+        initFont();
     }
+
     public void drawFilledRect(float x, float y, float width, float height) {
         glPushMatrix();
 
@@ -33,15 +33,18 @@ public class RenderGlobal {
         float blue = (color & 0xff) / 255F;
 
         glEnable(GL_BLEND);
+        glDisable(GL_TEXTURE_2D);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
         glColor4f(red, green, blue, alpha);
         drawFilledRect( x, y, width, height);
+        glEnable(GL_TEXTURE_2D);
         glDisable(GL_BLEND);
     }
 
 
     public void drawHollowRect(float x, float y, float width, float height, float thickness){
         glPushMatrix();
+        glDisable(GL_TEXTURE_2D);
 
         glTranslatef(x - 0.5f, y - 0.5f, 0);//shift to hit pixel
         glBegin(GL_LINE_LOOP);
@@ -52,6 +55,7 @@ public class RenderGlobal {
         glVertex2f(width, 0);
         glEnd();
 
+        glEnable(GL_TEXTURE_2D);
         glPopMatrix();
     }
 
@@ -96,10 +100,10 @@ public class RenderGlobal {
     }
 
 
-    public void initFont(int size){
+    public void initFont(){
         font = null;
         try {
-            font = new UnicodeFont("src/game/font/Vogue.ttf", size, false, false);
+            font = new UnicodeFont("src/game/font/Vogue.ttf", 100, false, false);
             font.getEffects().add(new ColorEffect(java.awt.Color.white)); // set the default color to white
             font.addAsciiGlyphs();
             font.loadGlyphs(); // load glyphs from font file
@@ -108,11 +112,8 @@ public class RenderGlobal {
         }
     }
 
-    public void drawFont(float posx, float posy, int size, String text, Color color){
-
-        if(size != oldFontSize){
-            initFont(size);
-        }
+    public void drawFont(float posx, float posy, float scale, String text, java.awt.Color color){
+        org.newdawn.slick.Color color1 = new org.newdawn.slick.Color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
 
         glPushMatrix();
         glEnable(GL_BLEND);
@@ -120,8 +121,35 @@ public class RenderGlobal {
         glDisable(GL_DEPTH_TEST);
         glEnable(GL_TEXTURE_2D);
 
-        font.drawString(posx, posy, text, color);
+        glTranslatef(posx, posy, 0);
+        glScalef(scale, scale, scale);
+        glTranslatef(-posx, -posy, 0);
 
+        font.drawString(posx, posy, text, color1);
+        glDisable(GL_TEXTURE_2D);
+        glDisable(GL_DEPTH_TEST);
+        glDisable(GL_BLEND);
+        glPopMatrix();
+    }
+
+    public void drawCenteredFont(float posx, float posy, float scale, String text, java.awt.Color color){
+        org.newdawn.slick.Color color1 = new org.newdawn.slick.Color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
+
+        posx -= (float)(font.getWidth(text) / 2);
+
+        glPushMatrix();
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glDisable(GL_DEPTH_TEST);
+        glEnable(GL_TEXTURE_2D);
+        float fw2 = (float)font.getWidth(text)/2;
+        float fh2 = (float)font.getHeight(text)/2;
+
+        glTranslatef(posx+fw2, (posy+fh2), 0);
+        glScalef(scale, scale, scale);
+        glTranslatef(-(posx+fw2), -(posy+fh2), 0);
+
+        font.drawString(posx, posy, text, color1);
         glDisable(GL_TEXTURE_2D);
         glDisable(GL_DEPTH_TEST);
         glDisable(GL_BLEND);

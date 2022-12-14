@@ -23,22 +23,24 @@ public class Ball {
 
 
     public void updateOnFrame(Block[] block, int blockCount) {
-        posY += motionY;
-        posX += motionX;
+        if(!gameClass.isGameOver()){
+            posY += motionY;
+            posX += motionX;
 
-        axisAligned.setAABB(posX - ballRadius, posY - ballRadius, posX + ballRadius, posY + ballRadius);
+            axisAligned.setAABB(posX - ballRadius, posY - ballRadius, posX + ballRadius, posY + ballRadius);
 
-        if(posX - ballRadius <= 2){
-            motionX = -motionX;
-        }
-        if(posX + ballRadius >= 996){
-            motionX = -motionX;
-        }
-        if(posY + ballRadius >= 696){
-            motionY = -motionY;
-        }
-        if(posY - ballRadius <= 2){
-            motionY = -motionY;
+            if (posX - ballRadius <= 2) {
+                motionX = -motionX;
+            }
+            if (posX + ballRadius >= 996) {
+                motionX = -motionX;
+            }
+            if (posY + ballRadius >= 696) {
+                gameClass.setGameOver(true);
+            }
+            if (posY - ballRadius <= 2) {
+                motionY = -motionY;
+            }
         }
 
         for(int i = 0; i < blockCount; i++){

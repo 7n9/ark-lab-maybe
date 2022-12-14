@@ -4,16 +4,11 @@ import game.elements.Ball;
 import game.elements.Block;
 import game.elements.Bumper;
 
-import org.lwjgl.examples.Game;
 import org.lwjgl.input.Keyboard;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.UnicodeFont;
 
 import java.awt.Color;
 
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 public class GameClass {
@@ -25,6 +20,7 @@ public class GameClass {
         block = new Block[2000];
         blockCount = 0;
         score = 0;
+        isGameOver = false;
         random = new Random(System.currentTimeMillis());
         addBlocks();
 
@@ -60,9 +56,15 @@ public class GameClass {
         }
         bumper.render();
         ball.render();
-    
-        renderGlobal.drawFont(10.0f, 10.0f, 30, "Score: " + score, org.newdawn.slick.Color.pink);
-    
+
+        if(isGameOver){
+            renderGlobal.drawFilledRectWithColor(300, 250, 400, 200, Color.WHITE.getRGB());
+            renderGlobal.drawFilledRectWithColor(305, 255, 390, 190, Color.BLACK.getRGB());
+            renderGlobal.drawCenteredFont(500, 280, 0.5f, "GAME OVER!", Color.red);
+            renderGlobal.drawCenteredFont(500, 330, 0.2f, "Final score: " + score, Color.red);
+        }else{
+            renderGlobal.drawFont(10.0f, 10.0f, 0.3f, "Score: " + score, Color.MAGENTA);
+        }
     }
 
 
@@ -82,6 +84,14 @@ public class GameClass {
 
     public void addScore(int amount){
         score += amount;
+    }
+
+    public void setGameOver(boolean isItOver){
+        isGameOver = isItOver;
+    }
+
+    public boolean isGameOver(){
+        return isGameOver;
     }
 
     private Block block[];
