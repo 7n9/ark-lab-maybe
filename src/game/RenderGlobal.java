@@ -103,7 +103,7 @@ public class RenderGlobal {
     public void initFont(){
         font = null;
         try {
-            font = new UnicodeFont("src/game/font/Vogue.ttf", 100, false, false);
+            font = new UnicodeFont("src/game/font/Arinoe.ttf", 100, false, false);
             font.getEffects().add(new ColorEffect(java.awt.Color.white)); // set the default color to white
             font.addAsciiGlyphs();
             font.loadGlyphs(); // load glyphs from font file

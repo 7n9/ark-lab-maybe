@@ -32,12 +32,33 @@ public class GameClass {
 
 
     public void getInput() {
-        if(Keyboard.isKeyDown(Keyboard.KEY_LEFT) && bumper.getPosX() > 2){
-            bumper.incrementPosX(-4.0f);
+        if(!isGameOver){
+            if (Keyboard.isKeyDown(Keyboard.KEY_LEFT) && bumper.getPosX() > 2) {
+                bumper.incrementPosX(-4.0f);
+            }
+            if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT) && bumper.getPosX() < width - bumper.getBumperWidth() - 4.0f) {
+                bumper.incrementPosX(4.0f);
+            }
+        }else{
+            if(Keyboard.isKeyDown(Keyboard.KEY_Y)){
+                restartGame();
+            }
+            if(Keyboard.isKeyDown(Keyboard.KEY_N)){
+                System.exit(0);
+            }
         }
-        if(Keyboard.isKeyDown(Keyboard.KEY_RIGHT) && bumper.getPosX() < width - bumper.getBumperWidth() - 4.0f){
-            bumper.incrementPosX(4.0f);
-        }
+
+    }
+
+    private void restartGame() {
+        block = new Block[2000];
+        blockCount = 0;
+        score = 0;
+        addBlocks();
+        bumper.setPosX(width/2.0f - (float)bumper.getBumperWidth()/2);
+        ball.setPosXY(500 - ball.getBallRadius(), 600);
+        ball.setMotionXY(1.5f, 1.5f);
+        isGameOver = false;
     }
 
 
@@ -60,8 +81,10 @@ public class GameClass {
         if(isGameOver){
             renderGlobal.drawFilledRectWithColor(300, 250, 400, 200, Color.WHITE.getRGB());
             renderGlobal.drawFilledRectWithColor(305, 255, 390, 190, Color.BLACK.getRGB());
-            renderGlobal.drawCenteredFont(500, 280, 0.5f, "GAME OVER!", Color.red);
-            renderGlobal.drawCenteredFont(500, 330, 0.2f, "Final score: " + score, Color.red);
+            renderGlobal.drawCenteredFont(500, 280, 0.5f, "GAME OVER!", Color.RED);
+            renderGlobal.drawCenteredFont(500, 330, 0.2f, "Final score: " + score, Color.WHITE);
+            renderGlobal.drawCenteredFont(500, 370, 0.3f, "Restart? Y/N", Color.RED);
+
         }else{
             renderGlobal.drawFont(10.0f, 10.0f, 0.3f, "Score: " + score, Color.MAGENTA);
         }

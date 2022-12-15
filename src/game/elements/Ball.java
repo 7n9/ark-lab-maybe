@@ -70,6 +70,20 @@ public class Ball {
         }
     }
 
+    public void setPosXY(float posX, float posY){
+        this.posX = posX;
+        this.posY = posY;
+    }
+
+    public void setMotionXY(float motionX, float motionY){
+        this.motionX = motionX;
+        this.motionY = motionY;
+    }
+
+    public float getBallRadius(){
+        return ballRadius;
+    }
+
     private float posX, posY;
     private float motionX, motionY;
     private float ballRadius, ballCircumference;
